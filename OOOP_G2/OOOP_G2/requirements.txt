@@ -1,0 +1,2 @@
+# The runtime application uses only the Python standard library.
+# Python 3.10+ is recommended because the source uses modern type hints.

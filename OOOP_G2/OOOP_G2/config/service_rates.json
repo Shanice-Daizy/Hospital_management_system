@@ -1,0 +1,17 @@
+{
+  "Doctor": {
+    "standard": 50000,
+    "review": 35000,
+    "specialist": 70000
+  },
+  "Nurse": {
+    "standard": 20000,
+    "procedure": 30000,
+    "follow_up": 15000
+  },
+  "ClinicalOfficer": {
+    "standard": 30000,
+    "review": 25000,
+    "minor_procedure": 40000
+  }
+}

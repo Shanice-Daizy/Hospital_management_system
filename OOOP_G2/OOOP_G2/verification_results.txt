@@ -1,0 +1,29 @@
+test_complete_consultation_and_reject_double_completion (test_system.HospitalSystemTests.test_complete_consultation_and_reject_double_completion) ... ok
+test_consultation_links_objects_and_history (test_system.HospitalSystemTests.test_consultation_links_objects_and_history) ... ok
+test_duplicate_phone_rejected (test_system.HospitalSystemTests.test_duplicate_phone_rejected) ... ok
+test_persistence_reload (test_system.HospitalSystemTests.test_persistence_reload) ... ok
+test_register_patient_assigns_unique_ids (test_system.HospitalSystemTests.test_register_patient_assigns_unique_ids) ... ok
+test_validation_rejects_bad_inputs (test_system.HospitalSystemTests.test_validation_rejects_bad_inputs) ... ok
+test_worker_subclasses_and_polymorphic_charges (test_system.HospitalSystemTests.test_worker_subclasses_and_polymorphic_charges) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.008s
+
+OK
+
+HOSPITAL OUTPATIENT MANAGEMENT SYSTEM
+1. Register patient
+2. Register health worker
+3. Create consultation
+4. Complete consultation
+5. Cancel consultation
+6. Search patients
+7. Search health workers
+8. View patient consultation history
+9. Display current consultations
+10. Display completed consultations
+11. Display all patients and health workers
+12. View summary report
+0. Exit
+
+Choose an option: Goodbye.

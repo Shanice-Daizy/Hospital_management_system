@@ -1,0 +1,32 @@
+digraph UML {
+  graph [rankdir=TB, splines=polyline, nodesep=0.55, ranksep=0.75, bgcolor="white", pad=0.2];
+  node [shape=record, fontname="Arial", fontsize=10, margin="0.08,0.05"];
+  edge [fontname="Arial", fontsize=9];
+
+  Patient [label="{Patient| - __patient_id: str\l # _name: str\l # _phone: str\l + registered_on: str\l| + patient_id: str\l + name: str\l + phone: str\l + age: int\l + matches(query): bool\l + to_dict(): dict\l}"];
+
+  HealthWorker [label="{HealthWorker (abstract)| + role: str\l - __worker_id: str\l # _name: str\l # _phone: str\l # _service_rates: dict\l| + worker_id: str\l + available_services: list\l + provide_service(service): str [abstract]\l + calculate_charge(service): float [abstract]\l + matches(query): bool\l}"];
+
+  Doctor [label="{Doctor| + role = Doctor\l| + provide_service(service): str\l + calculate_charge(service): float\l}"];
+  Nurse [label="{Nurse| + role = Nurse\l| + provide_service(service): str\l + calculate_charge(service): float\l}"];
+  ClinicalOfficer [label="{ClinicalOfficer| + role = ClinicalOfficer\l| + provide_service(service): str\l + calculate_charge(service): float\l}"];
+
+  Consultation [label="{Consultation| - __consultation_id: str\l + patient: Patient\l + health_worker: HealthWorker\l # _consultation_date: str\l # _complaint: str\l # _service_type: str\l - __charge: float\l # _status: ConsultationStatus\l| + complete(): void\l + cancel(): void\l + to_dict(): dict\l}"];
+
+  HospitalSystem [label="{HospitalSystem| # _repository: JsonRepository\l # _rates: dict\l # _patients: dict\l # _workers: dict\l # _consultations: dict\l| + register_patient(...)\l + register_health_worker(...)\l + create_consultation(...)\l + search_patients(query)\l + search_health_workers(query)\l + patient_history(id)\l + consultations_by_status(status)\l + summary_report(): dict\l}"];
+
+  JsonRepository [label="{JsonRepository| # _data_file: Path\l| + load(): dict\l + save(data): void\l + next_id(ids,prefix): str\l}"];
+
+  {rank=same; Doctor; Nurse; ClinicalOfficer;}
+  Doctor -> HealthWorker [arrowhead=empty, label=" inheritance"];
+  Nurse -> HealthWorker [arrowhead=empty, label=" inheritance"];
+  ClinicalOfficer -> HealthWorker [arrowhead=empty, label=" inheritance"];
+
+  Consultation -> Patient [dir=none, label=" association\n0..* consultations : 1 patient"];
+  Consultation -> HealthWorker [dir=none, label=" association\n0..* consultations : 1 worker"];
+
+  HospitalSystem -> Patient [arrowtail=odiamond, dir=both, arrowhead=none, label=" manages 0..*"];
+  HospitalSystem -> HealthWorker [arrowtail=odiamond, dir=both, arrowhead=none, label=" manages 0..*"];
+  HospitalSystem -> Consultation [arrowtail=odiamond, dir=both, arrowhead=none, label=" manages 0..*"];
+  HospitalSystem -> JsonRepository [style=dashed, arrowhead=open, label=" dependency"];
+}
