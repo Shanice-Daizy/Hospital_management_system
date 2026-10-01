@@ -147,5 +147,13 @@ def handle_menu_choice(system, choice):
         )
     elif choice == "6":
         display_records(system.search_health_workers(input("Search text: ")))
+    elif choice == "7":
+        create_consultation(system)
+    elif choice == "8":
+        start_consultation(system)
+    elif choice == "9":
+        complete_consultation(system)
+    elif choice == "10":
+        cancel_consultation(system)
     else:
         print("Invalid menu choice. Please enter a number from 0 to 18.")
