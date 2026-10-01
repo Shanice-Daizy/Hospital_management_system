@@ -58,3 +58,26 @@ def register_patient(system):
         input("Address: "),
     )
     print(f"Patient registered successfully: {patient}")
+
+
+def register_health_worker(system):
+    print("\nREGISTER HEALTH WORKER")
+    worker_type = input("Type (Doctor/Nurse/Clinical Officer): ")
+    first_name = input("First name: ")
+    last_name = input("Last name: ")
+    phone = input("Phone: ")
+    department = input("Department: ")
+    base_fee = input("Base fee: ")
+    specialty = None
+    if worker_type.strip().lower() == "doctor":
+        specialty = input("Specialty: ")
+    worker = system.register_health_worker(
+        worker_type,
+        first_name,
+        last_name,
+        phone,
+        department,
+        base_fee,
+        specialty,
+    )
+    print(f"Health worker registered successfully: {worker}")
