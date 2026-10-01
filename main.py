@@ -37,3 +37,12 @@ HISTORY & REPORTS
 
 0. Exit
 """
+
+
+def display_records(records, empty_message="No records found."):
+    """Print each record in a collection."""
+    if not records:
+        print(empty_message)
+        return
+    for record in records:
+        print(record)
