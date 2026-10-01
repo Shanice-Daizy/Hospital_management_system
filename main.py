@@ -155,5 +155,27 @@ def handle_menu_choice(system, choice):
         complete_consultation(system)
     elif choice == "10":
         cancel_consultation(system)
+    elif choice == "11":
+        display_records(
+            system.get_patient_history(input("Patient ID: ")),
+            "This patient has no consultations.",
+        )
+    elif choice == "12":
+        display_records(
+            system.get_health_worker_history(input("Health worker ID: ")),
+            "This health worker has no consultations.",
+        )
+    elif choice == "13":
+        display_records(system.get_scheduled_consultations())
+    elif choice == "14":
+        display_records(system.get_current_consultations())
+    elif choice == "15":
+        display_records(system.get_completed_consultations())
+    elif choice == "16":
+        display_records(system.get_cancelled_consultations())
+    elif choice == "17":
+        display_records(system.get_all_consultations())
+    elif choice == "18":
+        display_summary(system)
     else:
         print("Invalid menu choice. Please enter a number from 0 to 18.")
