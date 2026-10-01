@@ -81,3 +81,16 @@ def register_health_worker(system):
         specialty,
     )
     print(f"Health worker registered successfully: {worker}")
+
+
+def create_consultation(system):
+    print("\nCREATE CONSULTATION")
+    consultation = system.create_consultation(
+        input("Patient ID: "),
+        input("Health worker ID: "),
+        validate_consultation_date(
+            input("Consultation date (YYYY-MM-DD): ")
+        ),
+        input("Complaint: "),
+    )
+    print(f"Consultation created successfully: {consultation}")
