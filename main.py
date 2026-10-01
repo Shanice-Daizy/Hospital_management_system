@@ -46,3 +46,15 @@ def display_records(records, empty_message="No records found."):
         return
     for record in records:
         print(record)
+
+
+def register_patient(system):
+    print("\nREGISTER PATIENT")
+    patient = system.register_patient(
+        input("First name: "),
+        input("Last name: "),
+        input("Phone: "),
+        validate_date_of_birth(input("Date of birth (YYYY-MM-DD): ")),
+        input("Address: "),
+    )
+    print(f"Patient registered successfully: {patient}")
