@@ -99,3 +99,10 @@ def create_consultation(system):
 def start_consultation(system):
     consultation = system.start_consultation(input("Consultation ID: "))
     print(f"Consultation {consultation.consultation_id} is now CURRENT.")
+
+
+def complete_consultation(system):
+    consultation_id = input("Consultation ID: ")
+    notes = input("Completion notes: ")
+    consultation = system.complete_consultation(consultation_id, notes)
+    print(f"Consultation {consultation.consultation_id} was completed.")
