@@ -113,3 +113,19 @@ def cancel_consultation(system):
     reason = input("Cancellation reason: ")
     consultation = system.cancel_consultation(consultation_id, reason)
     print(f"Consultation {consultation.consultation_id} was cancelled.")
+
+
+def display_summary(system):
+    summary = system.get_summary()
+    print("\nSYSTEM SUMMARY")
+    print(f"Patients: {summary['patients']}")
+    print(f"Total health workers: {summary['health_workers']}")
+    print(f"Doctors: {summary['doctors']}")
+    print(f"Nurses: {summary['nurses']}")
+    print(f"Clinical officers: {summary['clinical_officers']}")
+    print(f"Total consultations: {summary['consultations']}")
+    print(f"Scheduled: {summary['scheduled']}")
+    print(f"Current: {summary['current']}")
+    print(f"Completed: {summary['completed']}")
+    print(f"Cancelled: {summary['cancelled']}")
+    print(f"Completed consultation charges: {summary['completed_charges']:.2f}")
