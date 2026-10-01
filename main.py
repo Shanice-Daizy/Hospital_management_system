@@ -129,3 +129,15 @@ def display_summary(system):
     print(f"Completed: {summary['completed']}")
     print(f"Cancelled: {summary['cancelled']}")
     print(f"Completed consultation charges: {summary['completed_charges']:.2f}")
+
+
+def handle_menu_choice(system, choice):
+    """Call the operation selected by the user."""
+    if choice == "1":
+        register_patient(system)
+    elif choice == "2":
+        display_records(system.list_patients(), "No patients registered.")
+    elif choice == "3":
+        display_records(system.search_patients(input("Search text: ")))
+    else:
+        print("Invalid menu choice. Please enter a number from 0 to 18.")
