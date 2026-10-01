@@ -106,3 +106,10 @@ def complete_consultation(system):
     notes = input("Completion notes: ")
     consultation = system.complete_consultation(consultation_id, notes)
     print(f"Consultation {consultation.consultation_id} was completed.")
+
+
+def cancel_consultation(system):
+    consultation_id = input("Consultation ID: ")
+    reason = input("Cancellation reason: ")
+    consultation = system.cancel_consultation(consultation_id, reason)
+    print(f"Consultation {consultation.consultation_id} was cancelled.")
