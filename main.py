@@ -179,3 +179,25 @@ def handle_menu_choice(system, choice):
         display_summary(system)
     else:
         print("Invalid menu choice. Please enter a number from 0 to 18.")
+
+
+def main():
+    """Run the menu until the user chooses to exit."""
+    system = HospitalSystem()
+    while True:
+        print(MENU)
+        choice = input("Enter your choice: ").strip()
+        if choice == "0":
+            print("Thank you for using the system. Goodbye.")
+            break
+        try:
+            handle_menu_choice(system, choice)
+        except ValueError as error:
+            print(f"Error: {error}")
+        except (EOFError, KeyboardInterrupt):
+            print("\nOperation cancelled.")
+            break
+
+
+if __name__ == "__main__":
+    main()
