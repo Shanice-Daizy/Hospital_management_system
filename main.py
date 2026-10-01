@@ -94,3 +94,8 @@ def create_consultation(system):
         input("Complaint: "),
     )
     print(f"Consultation created successfully: {consultation}")
+
+
+def start_consultation(system):
+    consultation = system.start_consultation(input("Consultation ID: "))
+    print(f"Consultation {consultation.consultation_id} is now CURRENT.")
