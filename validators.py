@@ -8,3 +8,13 @@ def validate_non_empty_text(value, field_name):
     if not isinstance(value, str) or not value.strip():
         raise ValueError(f"{field_name} cannot be blank.")
     return value.strip()
+
+
+def validate_name(value, field_name):
+    """Validate a person's name."""
+    return validate_non_empty_text(value, field_name)
+
+
+def validate_phone(value):
+    """Validate and trim a phone number."""
+    return validate_non_empty_text(value, "Phone")
