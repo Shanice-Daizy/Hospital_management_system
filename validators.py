@@ -57,3 +57,8 @@ def validate_date_of_birth(value):
     if birth_date > date.today():
         raise ValueError("Date of birth cannot be in the future.")
     return birth_date
+
+
+def validate_consultation_date(value):
+    """Validate a consultation date."""
+    return _validate_date(value, "Consultation date")
