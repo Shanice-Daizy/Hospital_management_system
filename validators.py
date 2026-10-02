@@ -49,3 +49,11 @@ def _validate_date(value, field_name):
                 f"{field_name} must use the YYYY-MM-DD format."
             ) from error
     raise ValueError(f"{field_name} must be a valid date.")
+
+
+def validate_date_of_birth(value):
+    """Validate a date of birth and reject future dates."""
+    birth_date = _validate_date(value, "Date of birth")
+    if birth_date > date.today():
+        raise ValueError("Date of birth cannot be in the future.")
+    return birth_date
