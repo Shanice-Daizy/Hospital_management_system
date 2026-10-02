@@ -33,3 +33,19 @@ def validate_positive_number(value, field_name):
     if number <= 0:
         raise ValueError(f"{field_name} must be greater than zero.")
     return number
+
+
+def _validate_date(value, field_name):
+    """Return a date object from a date or YYYY-MM-DD text."""
+    if isinstance(value, datetime):
+        return value.date()
+    if isinstance(value, date):
+        return value
+    if isinstance(value, str):
+        try:
+            return datetime.strptime(value.strip(), "%Y-%m-%d").date()
+        except ValueError as error:
+            raise ValueError(
+                f"{field_name} must use the YYYY-MM-DD format."
+            ) from error
+    raise ValueError(f"{field_name} must be a valid date.")
