@@ -33,4 +33,36 @@ class HospitalSystem:
         consultation_id = f"C{self.__next_consultation_number:04d}"
         self.__next_consultation_number += 1
         return consultation_id
-    
+    def register_patient(
+        self, first_name, last_name, phone, date_of_birth, address
+    ):
+        patient_id = self.__generate_patient_id()
+
+        try:
+            patient = Patient(
+                patient_id,
+                first_name,
+                last_name,
+                phone,
+                date_of_birth,
+                address,
+            )
+        except ValueError:
+            self.__next_patient_number -= 1
+            raise
+
+        self.__patients[patient_id] = patient
+        return patient
+
+    def find_patient(self, patient_id):
+        key = str(patient_id).strip().upper()
+
+        patient = self.__patients.get(key)
+
+        if patient is None:
+            raise ValueError(f"Patient '{key}' was not found.")
+
+        return patient
+
+    def list_patients(self):
+        return list(self.__patients.values())
