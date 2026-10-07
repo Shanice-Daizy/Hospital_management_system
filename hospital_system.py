@@ -216,4 +216,17 @@ class HospitalSystem:
         self.__consultations[consultation_id] = consultation
 
         return consultation
-    
+        def start_consultation(self, consultation_id):
+        consultation = self.find_consultation(consultation_id)
+        consultation.start()
+        return consultation
+
+    def complete_consultation(self, consultation_id, notes):
+        consultation = self.find_consultation(consultation_id)
+        consultation.complete(notes)
+        return consultation
+
+    def cancel_consultation(self, consultation_id, reason):
+        consultation = self.find_consultation(consultation_id)
+        consultation.cancel(reason)
+        return consultation
