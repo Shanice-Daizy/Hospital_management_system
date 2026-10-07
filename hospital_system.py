@@ -130,7 +130,7 @@ class HospitalSystem:
 
     def list_health_workers(self):
         return list(self.__health_workers.values())
-        def search_patients(self, query):
+    def search_patients(self, query):
         search_text = str(query).strip().lower()
         matches = []
 
@@ -176,7 +176,7 @@ class HospitalSystem:
                 matches.append(worker)
 
         return matches
-        def find_consultation(self, consultation_id):
+    def find_consultation(self, consultation_id):
         key = str(consultation_id).strip().upper()
 
         consultation = self.__consultations.get(key)
@@ -216,8 +216,23 @@ class HospitalSystem:
         self.__consultations[consultation_id] = consultation
 
         return consultation
-        def start_consultation(self, consultation_id):
+    def start_consultation(self, consultation_id):
         consultation = self.find_consultation(consultation_id)
+
+        for current in self.get_current_consultations():
+            if current is consultation:
+                continue
+
+            if current.patient is consultation.patient:
+                raise ValueError(
+                    "Patient already has a current consultation."
+                )
+
+            if current.health_worker is consultation.health_worker:
+                raise ValueError(
+                    "Health worker already has a current consultation."
+                )
+
         consultation.start()
         return consultation
 
@@ -230,7 +245,7 @@ class HospitalSystem:
         consultation = self.find_consultation(consultation_id)
         consultation.cancel(reason)
         return consultation
-        def get_patient_history(self, patient_id):
+    def get_patient_history(self, patient_id):
         patient = self.find_patient(patient_id)
 
         return [
@@ -277,7 +292,7 @@ class HospitalSystem:
 
     def get_all_consultations(self):
         return list(self.__consultations.values())
-        def get_summary(self):
+    def get_summary(self):
         workers = self.list_health_workers()
         completed = self.get_completed_consultations()
 
@@ -321,3 +336,4 @@ class HospitalSystem:
                 for consultation in completed
             ),
         }
+    
