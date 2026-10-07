@@ -126,14 +126,6 @@ class Consultation:
 
 
 
-    def __init__(
-        self,
-        consultation_id,
-        patient,
-        health_worker,
-        consultation_date,
-        complaint,
-    ):
         self.__consultation_id = validate_non_empty_text(
             consultation_id, "Consultation ID"
         )
