@@ -176,3 +176,44 @@ class HospitalSystem:
                 matches.append(worker)
 
         return matches
+        def find_consultation(self, consultation_id):
+        key = str(consultation_id).strip().upper()
+
+        consultation = self.__consultations.get(key)
+
+        if consultation is None:
+            raise ValueError(
+                f"Consultation '{key}' was not found."
+            )
+
+        return consultation
+
+    def create_consultation(
+        self,
+        patient_id,
+        worker_id,
+        consultation_date,
+        complaint,
+    ):
+        patient = self.find_patient(patient_id)
+        worker = self.find_health_worker(worker_id)
+
+        consultation_id = self.__generate_consultation_id()
+
+        try:
+            consultation = Consultation(
+                consultation_id,
+                patient,
+                worker,
+                consultation_date,
+                complaint,
+            )
+
+        except ValueError:
+            self.__next_consultation_number -= 1
+            raise
+
+        self.__consultations[consultation_id] = consultation
+
+        return consultation
+    
