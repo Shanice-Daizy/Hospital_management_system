@@ -130,8 +130,7 @@ from validators import (
 )
 
 
-class Consultation:
-    """Represent one outpatient interaction."""
+
 
    
 
