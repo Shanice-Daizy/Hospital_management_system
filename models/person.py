@@ -53,5 +53,3 @@ class Person(ABC):
 
     def __str__(self):
         return f"{self.id} - {self.full_name} ({self.get_role()})"
-
-    

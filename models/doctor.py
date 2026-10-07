@@ -27,7 +27,7 @@ class Doctor(HealthWorker):
 
     @property
     def specialty(self):
-        return self.__specialty 
+        return self.__specialty
 
     @specialty.setter
     def specialty(self, value):

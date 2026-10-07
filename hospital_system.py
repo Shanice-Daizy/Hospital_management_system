@@ -336,4 +336,3 @@ class HospitalSystem:
                 for consultation in completed
             ),
         }
-    
