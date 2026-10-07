@@ -125,13 +125,6 @@ class Consultation:
 
 
 
-class Consultation:
-    """Represent one outpatient interaction."""
-
-    SCHEDULED = "SCHEDULED"
-    CURRENT = "CURRENT"
-    COMPLETED = "COMPLETED"
-    CANCELLED = "CANCELLED"
 
     def __init__(
         self,
