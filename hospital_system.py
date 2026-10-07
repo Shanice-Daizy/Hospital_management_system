@@ -130,3 +130,49 @@ class HospitalSystem:
 
     def list_health_workers(self):
         return list(self.__health_workers.values())
+        def search_patients(self, query):
+        search_text = str(query).strip().lower()
+        matches = []
+
+        for patient in self.__patients.values():
+            searchable_values = (
+                patient.patient_id,
+                patient.first_name,
+                patient.last_name,
+                patient.full_name,
+                patient.phone,
+            )
+
+            if any(
+                search_text in str(value).lower()
+                for value in searchable_values
+            ):
+                matches.append(patient)
+
+        return matches
+
+    def search_health_workers(self, query):
+        search_text = str(query).strip().lower()
+        matches = []
+
+        for worker in self.__health_workers.values():
+            searchable_values = [
+                worker.worker_id,
+                worker.first_name,
+                worker.last_name,
+                worker.full_name,
+                worker.phone,
+                worker.department,
+                worker.get_role(),
+            ]
+
+            if isinstance(worker, Doctor):
+                searchable_values.append(worker.specialty)
+
+            if any(
+                search_text in str(value).lower()
+                for value in searchable_values
+            ):
+                matches.append(worker)
+
+        return matches
