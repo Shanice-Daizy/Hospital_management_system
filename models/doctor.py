@@ -1,4 +1,4 @@
-"""The Doctor model."""
+"""Doctor model."""
 
 from models.health_worker import HealthWorker
 from validators import validate_non_empty_text

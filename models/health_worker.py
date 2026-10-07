@@ -7,7 +7,7 @@ from validators import validate_non_empty_text, validate_positive_number
 
 
 class HealthWorker(Person):
-    """Define the details and behaviour shared by all health workers."""
+    """Define details and behaviour shared by all health workers."""
 
     def __init__(
         self, worker_id, first_name, last_name, phone, department, base_fee
