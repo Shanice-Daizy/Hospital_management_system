@@ -230,3 +230,50 @@ class HospitalSystem:
         consultation = self.find_consultation(consultation_id)
         consultation.cancel(reason)
         return consultation
+        def get_patient_history(self, patient_id):
+        patient = self.find_patient(patient_id)
+
+        return [
+            consultation
+            for consultation in self.__consultations.values()
+            if consultation.patient is patient
+        ]
+
+    def get_health_worker_history(self, worker_id):
+        worker = self.find_health_worker(worker_id)
+
+        return [
+            consultation
+            for consultation in self.__consultations.values()
+            if consultation.health_worker is worker
+        ]
+
+    def _get_consultations_by_status(self, status):
+        return [
+            consultation
+            for consultation in self.__consultations.values()
+            if consultation.status == status
+        ]
+
+    def get_scheduled_consultations(self):
+        return self._get_consultations_by_status(
+            Consultation.SCHEDULED
+        )
+
+    def get_current_consultations(self):
+        return self._get_consultations_by_status(
+            Consultation.CURRENT
+        )
+
+    def get_completed_consultations(self):
+        return self._get_consultations_by_status(
+            Consultation.COMPLETED
+        )
+
+    def get_cancelled_consultations(self):
+        return self._get_consultations_by_status(
+            Consultation.CANCELLED
+        )
+
+    def get_all_consultations(self):
+        return list(self.__consultations.values())
