@@ -126,10 +126,6 @@ class Consultation:
 
 
 
-        if not isinstance(patient, Patient):
-            raise ValueError("Patient must be a Patient object.")
-        
-                "Health worker must be a HealthWorker object."
             )
 
         self.__patient = patient
