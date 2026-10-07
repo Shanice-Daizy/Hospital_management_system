@@ -123,17 +123,7 @@ class Consultation:
         )
 
 
-    def __init__(
-        self,
-        consultation_id,
-        patient,
-        health_worker,
-        consultation_date,
-        complaint,
-    ):
-        self.__consultation_id = validate_non_empty_text(
-            consultation_id, "Consultation ID"
-        )
+   
         if not isinstance(patient, Patient):
             raise ValueError("Patient must be a Patient object.")
         if not isinstance(health_worker, HealthWorker):
