@@ -16,7 +16,9 @@ class HealthWorker(Person):
         self.department = department
         self.base_fee = base_fee
 
-    
+    @property
+    def worker_id(self):
+        return self.id
 
     @property
     def department(self):
