@@ -120,9 +120,4 @@ class Consultation:
             f"Worker: {self.health_worker.full_name} "
             f"({self.health_worker.get_role()}) | {self.service} | "
             f"Status: {self.status} | Charge: {self.charge:.2f}"
-        ) 
-
-git status
-git add .
-git commit -m "Update consultation model"
-git push
+        )  
