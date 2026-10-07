@@ -277,3 +277,47 @@ class HospitalSystem:
 
     def get_all_consultations(self):
         return list(self.__consultations.values())
+        def get_summary(self):
+        workers = self.list_health_workers()
+        completed = self.get_completed_consultations()
+
+        return {
+            "patients": len(self.__patients),
+            "health_workers": len(workers),
+
+            "doctors": sum(
+                isinstance(worker, Doctor)
+                for worker in workers
+            ),
+
+            "nurses": sum(
+                isinstance(worker, Nurse)
+                for worker in workers
+            ),
+
+            "clinical_officers": sum(
+                isinstance(worker, ClinicalOfficer)
+                for worker in workers
+            ),
+
+            "consultations": len(self.__consultations),
+
+            "scheduled": len(
+                self.get_scheduled_consultations()
+            ),
+
+            "current": len(
+                self.get_current_consultations()
+            ),
+
+            "completed": len(completed),
+
+            "cancelled": len(
+                self.get_cancelled_consultations()
+            ),
+
+            "completed_charges": sum(
+                consultation.charge
+                for consultation in completed
+            ),
+        }
