@@ -152,13 +152,4 @@ from validators import (
                 "Health worker must be a HealthWorker object."
             )
 
-        self.__patient = patient
-        self.__health_worker = health_worker
-        self.__date = validate_consultation_date(consultation_date)
-        self.__complaint = validate_non_empty_text(complaint, "Complaint")
-        self.__service = health_worker.provide_service()
-        self.__status = self.SCHEDULED
-        self.__notes = ""
-        self.__charge = health_worker.calculate_charge()
-    
-    
+       
