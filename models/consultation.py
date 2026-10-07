@@ -122,12 +122,7 @@ class Consultation:
             f"Status: {self.status} | Charge: {self.charge:.2f}"
         )
 
-from models.health_worker import HealthWorker
-from models.patient import Patient
-from validators import (
-    validate_consultation_date,
-    validate_non_empty_text,
-)
+
 
 
 class Consultation:
