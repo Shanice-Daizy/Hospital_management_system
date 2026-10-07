@@ -1,5 +1,6 @@
 """Small validation helpers used by the outpatient system."""
 
+import math
 from datetime import date, datetime
 
 
@@ -21,7 +22,7 @@ def validate_phone(value):
 
 
 def validate_positive_number(value, field_name):
-    """Return a positive number as a float."""
+    """Return a finite positive number as a float."""
     if isinstance(value, bool):
         raise ValueError(f"{field_name} must be a number greater than zero.")
     try:
@@ -30,7 +31,7 @@ def validate_positive_number(value, field_name):
         raise ValueError(
             f"{field_name} must be a number greater than zero."
         ) from error
-    if number <= 0:
+    if not math.isfinite(number) or number <= 0:
         raise ValueError(f"{field_name} must be greater than zero.")
     return number
 
