@@ -165,42 +165,4 @@ class Consultation:
         self.__notes = ""
         self.__charge = health_worker.calculate_charge()
     
-    @property
-    def consultation_id(self):
-        return self.__consultation_id
-
-    @property
-    def patient(self):
-        return self.__patient
-
-    @property
-    def health_worker(self):
-        return self.__health_worker
-
-    @property
-    def date(self):
-        return self.__date
-
-    @property
-    def complaint(self):
-        return self.__complaint
-
-    @property
-    def service(self):
-        return self.__service
-
-    @property
-    def status(self):
-        return self.__status
-
-    @property
-    def notes(self):
-        return self.__notes
-
-    @property
-    def charge(self):
-        return self.__charge
-
-
-
-
+    
