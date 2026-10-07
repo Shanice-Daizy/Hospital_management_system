@@ -53,3 +53,4 @@ class Patient(Person):
             f"{self.patient_id} - {self.full_name}, Age: {self.age}, "
             f"Phone: {self.phone}, Address: {self.address}"
         )
+    def py
