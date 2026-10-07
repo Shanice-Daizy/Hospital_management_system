@@ -5,7 +5,7 @@ from models.consultation import Consultation
 from models.doctor import Doctor
 from models.nurse import Nurse
 from models.patient import Patient
-
+from validators import validate_non_empty_text
 
 class HospitalSystem:
     """Coordinates patients, health workers and consultations."""
@@ -66,3 +66,67 @@ class HospitalSystem:
 
     def list_patients(self):
         return list(self.__patients.values())
+    def register_health_worker(
+        self,
+        worker_type,
+        first_name,
+        last_name,
+        phone,
+        department,
+        base_fee,
+        specialty=None,
+    ):
+        cleaned_type = validate_non_empty_text(
+            worker_type, "Health worker type"
+        ).lower().replace("_", " ").replace("-", " ")
+
+        worker_classes = {
+            "doctor": Doctor,
+            "nurse": Nurse,
+            "clinical officer": ClinicalOfficer,
+            "clinicalofficer": ClinicalOfficer,
+        }
+
+        worker_class = worker_classes.get(cleaned_type)
+
+        if worker_class is None:
+            raise ValueError(
+                "Worker type must be Doctor, Nurse, or Clinical Officer."
+            )
+
+        worker_id = self.__generate_worker_id()
+
+        try:
+            common_details = (
+                worker_id,
+                first_name,
+                last_name,
+                phone,
+                department,
+                base_fee,
+            )
+
+            if worker_class is Doctor:
+                worker = Doctor(*common_details, specialty)
+            else:
+                worker = worker_class(*common_details)
+
+        except ValueError:
+            self.__next_worker_number -= 1
+            raise
+
+        self.__health_workers[worker_id] = worker
+        return worker
+
+    def find_health_worker(self, worker_id):
+        key = str(worker_id).strip().upper()
+
+        worker = self.__health_workers.get(key)
+
+        if worker is None:
+            raise ValueError(f"Health worker '{key}' was not found.")
+
+        return worker
+
+    def list_health_workers(self):
+        return list(self.__health_workers.values())
