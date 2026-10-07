@@ -122,4 +122,3 @@ class Consultation:
             f"Status: {self.status} | Charge: {self.charge:.2f}"
         )
 
-qqqqqqqqqqqqqqqueheuihiuhiuhiwuiudiuwsiuahiuwijiji
