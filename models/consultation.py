@@ -1,5 +1,4 @@
 """Consultation model and its controlled status lifecycle."""
-
 from models.health_worker import HealthWorker
 from models.patient import Patient
 from validators import (
@@ -42,7 +41,7 @@ class Consultation:
         self.__status = self.SCHEDULED
         self.__notes = ""
         self.__charge = health_worker.calculate_charge()
-
+    
     @property
     def consultation_id(self):
         return self.__consultation_id
@@ -78,6 +77,7 @@ class Consultation:
     @property
     def charge(self):
         return self.__charge
+
 
     def update_complaint(self, new_complaint):
         if self.status not in (self.SCHEDULED, self.CURRENT):
@@ -121,3 +121,82 @@ class Consultation:
             f"({self.health_worker.get_role()}) | {self.service} | "
             f"Status: {self.status} | Charge: {self.charge:.2f}"
         )
+
+from models.health_worker import HealthWorker
+from models.patient import Patient
+from validators import (
+    validate_consultation_date,
+    validate_non_empty_text,
+)
+
+
+class Consultation:
+    """Represent one outpatient interaction."""
+
+    SCHEDULED = "SCHEDULED"
+    CURRENT = "CURRENT"
+    COMPLETED = "COMPLETED"
+    CANCELLED = "CANCELLED"
+
+    def __init__(
+        self,
+        consultation_id,
+        patient,
+        health_worker,
+        consultation_date,
+        complaint,
+    ):
+        self.__consultation_id = validate_non_empty_text(
+            consultation_id, "Consultation ID"
+        )
+        if not isinstance(patient, Patient):
+            raise ValueError("Patient must be a Patient object.")
+        if not isinstance(health_worker, HealthWorker):
+            raise ValueError(
+                "Health worker must be a HealthWorker object."
+            )
+
+        self.__patient = patient
+        self.__health_worker = health_worker
+        self.__date = validate_consultation_date(consultation_date)
+        self.__complaint = validate_non_empty_text(complaint, "Complaint")
+        self.__service = health_worker.provide_service()
+        self.__status = self.SCHEDULED
+        self.__notes = ""
+        self.__charge = health_worker.calculate_charge()
+    
+    @property
+    def consultation_id(self):
+        return self.__consultation_id
+
+    @property
+    def patient(self):
+        return self.__patient
+
+    @property
+    def health_worker(self):
+        return self.__health_worker
+
+    @property
+    def date(self):
+        return self.__date
+
+    @property
+    def complaint(self):
+        return self.__complaint
+
+    @property
+    def service(self):
+        return self.__service
+
+    @property
+    def status(self):
+        return self.__status
+
+    @property
+    def notes(self):
+        return self.__notes
+
+    @property
+    def charge(self):
+        return self.__charge    
