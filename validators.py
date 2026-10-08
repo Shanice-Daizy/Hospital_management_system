@@ -13,12 +13,25 @@ def validate_non_empty_text(value, field_name):
 
 def validate_name(value, field_name):
     """Validate a person's name."""
-    return validate_non_empty_text(value, field_name)
+    name = validate_non_empty_text(value, field_name)
+    allowed_characters = (" ", "-", "'")
+    if not any(character.isalpha() for character in name) or not all(
+        character.isalpha() or character in allowed_characters
+        for character in name
+    ):
+        raise ValueError(
+            f"{field_name} must contain only letters, spaces, "
+            "hyphens, or apostrophes."
+        )
+    return name
 
 
 def validate_phone(value):
     """Validate and trim a phone number."""
-    return validate_non_empty_text(value, "Phone")
+    phone = validate_non_empty_text(value, "Phone")
+    if not phone.isascii() or not phone.isdigit():
+        raise ValueError("Phone must contain digits only.")
+    return phone
 
 
 def validate_positive_number(value, field_name):
